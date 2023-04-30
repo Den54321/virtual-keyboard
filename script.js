@@ -77,8 +77,9 @@ function createKey(keyName, language, idName){
   let key = document.createElement('div');
   key.classList.add('key');
   key.textContent = keyName;
-  if(keyName === ' ') key.classList.add('key-space')
-  if(keyName === 'Backspace') key.classList.add('key-back')
+  if(idName === 'Space' || idName === 'Backspace' || idName === 'ShiftLeft'  ||
+     idName === 'Tab' || idName === 'Delete'|| idName === 'CapsLock' || idName === 'Enter') key.classList.add('key-auto-size');
+  if(idName === 'ShiftRight') key.classList.add('key-shift'); 
   key.id = idName;
   return key;
 }
@@ -90,8 +91,8 @@ function createKeyBoard(language){
   for (const key in keys) {
     row.append(createKey.call(keys[key], keys[key][language], language, key));
     i++;
-    if(i === 15 || i === 29 || i === 42 || i === 55 || i === 63){
-        row.classList.add('bord-container__row');
+    if(i === 15 || i === 29 || i === 42 || i === 55 || i === 64){
+        row.classList.add('board-container__row');
         containerKey.append(row);
         row = document.createElement('div');
     }
