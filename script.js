@@ -125,32 +125,42 @@ function createPageContent(language){
 }
 function clickHandler(code){
     let input = document.querySelector('textarea');
-    input.focus();
+    let cursPos = input.selectionStart;
     if(pressKeysBoard.has('ControlLeft') && pressKeyMous ==='AltLeft' || pressKeysBoard.has('AltLeft') && pressKeyMous ==='ControlLeft' || pressKeysBoard.has('AltLeft') && pressKeysBoard.has('ControlLeft')){
       if(language ==='en') language = 'ru';
       else language ='en';
     }
-  
     if(keys[code] && keys[code][language].length === 1){
-      input.value += keys[code][language];
+      input.value  = input.value.slice(0 , cursPos) + keys[code][language] + input.value.slice(cursPos);
+      cursPos++;
     }
     if(keys[code] && keys[code][language] === 'Tab'){
       input.value += '    ';
+      cursPos += 4;
     }
     if(keys[code] && keys[code][language] === 'Backspace'){
-      input.value = input.value.slice(0 , -1);
+      if(cursPos !== 0){
+        input.value = input.value.slice(0 , cursPos - 1) + input.value.slice(cursPos);
+      cursPos--; 
+      }
     }
     if(keys[code] && keys[code][language] === 'Del'){
-      input.value = input.value.slice(0 , -1);
+      input.value = input.value.slice(0 , cursPos) + input.value.slice(cursPos + 1);
     } 
     if(keys[code] && keys[code][language] === 'Enter'){
-      input.value += "\n";
-    } 
+      let oldVal = input.value;
+      input.value = input.value.slice(0 , cursPos) + "\n";
+      cursPos = input.selectionStart;
+      input.value += oldVal.slice(cursPos - 1); 
+      input.selectionStart = cursPos;
+      input.selectionEnd = cursPos;
+      return;
+    }
+    input.selectionStart = cursPos;
+    input.selectionEnd = cursPos;
 }
 
 body.append(createPageContent(language));
-
-
 
 
 document.onmousedown = evt=>{
@@ -160,12 +170,13 @@ document.onmousedown = evt=>{
       clickHandler(pressKeyMous);
       pressElMous.classList.add('key--press');
     }
-  }
-  
-  document.onmouseup = evt=>{
+    let input = document.querySelector('textarea');
+    input.focus();
+} 
+document.onmouseup = evt=>{
     pressElMous.classList.remove('key--press');
     pressKeyMous = '';
     let input = document.querySelector('textarea');
     input.focus();
-  }
+}
  
