@@ -65,9 +65,9 @@ const keys  = {
     ArrowRight: { en: '→', ru: '→', shiftEn: '→', shiftRu: '→', CapsLockEn: '→', CapsLockRu: '→'}, 
     ControlRight: { en: 'Ctrl', ru: 'Ctrl', shiftEn: 'Ctrl', shiftRu: 'Ctrl', CapsLockEn: 'Ctrl', CapsLockRu: 'Ctrl'},
  };
-//  const containerKey = document.querySelector('.container');
 const body = document.querySelector('body');
 var language = 'en';
+if(localStorage.getItem('lang') === 'ru' || localStorage.getItem('lang') ==='en') language = localStorage.getItem('lang');
 var isPressShift = false;
 var isPressCaps = false;
 var pressElMous;
@@ -166,6 +166,7 @@ function upDateBoard(){
     else language ='en';
     newBoard = createKeyBoard(language);
     keyBoardContainer.innerHTML = newBoard.innerHTML;
+    localStorage.setItem('lang', `${language}`);
   }
 //----------------------------------------------------------------------------
 
