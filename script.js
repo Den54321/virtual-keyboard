@@ -1,5 +1,5 @@
 const keys  = {
-    Backquote: { en:'`', ru: 'ё', shiftEn: '~', shiftRu: 'Ё', CapsLockEn: null, CapsLockRu: 'Ё'},
+    Backquote: { en:'`', ru: 'ё', shiftEn: '~', shiftRu: 'Ё', CapsLockEn: '`', CapsLockRu: 'Ё'},
     Digit1: { en:'1', ru: '1', shiftEn: '!', shiftRu: '!', CapsLockEn: '1', CapsLockRu: '1'},
     Digit2: { en:'2', ru: '2', shiftEn: '@', shiftRu: '"', CapsLockEn: '2', CapsLockRu: '2'},
     Digit3: { en:'3', ru: '3', shiftEn: '#', shiftRu: '№', CapsLockEn: '3', CapsLockRu: '3'},
@@ -12,7 +12,7 @@ const keys  = {
     Digit0: { en:'0', ru: '0', shiftEn: ')', shiftRu: ')', CapsLockEn: '0', CapsLockRu: '0'},
     Minus: { en:'-', ru: '-', shiftEn: '_', shiftRu: '_', CapsLockEn: '-', CapsLockRu: '-'},
     Equal: { en:'=', ru: '=', shiftEn: '+', shiftRu: '+', CapsLockEn: '=', CapsLockRu: '='},
-    Backslash: { en:'\\', ru: '\\', shiftEn: '/', shiftRu: '/', CapsLockEn: null, CapsLockRu: null},
+    Backslash: { en:'\\', ru: '\\', shiftEn: '/', shiftRu: '/', CapsLockEn: '\\', CapsLockRu: '\\'},
     Backspace: { en: 'Backspace', ru: 'Backspace', shiftEn: 'Backspace', shiftRu: 'Backspace', CapsLockEn: 'Backspace', CapsLockRu: 'Backspace'},
     Tab: { en: 'Tab', ru: 'Tab', shiftEn: 'Tab', shiftRu: 'Tab', CapsLockEn: 'Tab', CapsLockRu: 'Tab'},
     KeyQ: { en: 'q', ru: 'й', shiftEn: 'Q', shiftRu: 'Й', CapsLockEn: 'Q', CapsLockRu: 'Й'},
@@ -69,6 +69,7 @@ const keys  = {
 const body = document.querySelector('body');
 var language = 'en';
 var isPressShift = false;
+var isPressCaps = false;
 var pressElMous;
 var pressKeyMous;
 var pressKeysBoard = new Set();
@@ -125,10 +126,6 @@ function clickHandler(code){
     let input = document.querySelector('textarea');
     input.focus();
     let cursPos = input.selectionStart;
-    // if(pressKeysBoard.has('ControlLeft') && pressKeyMous ==='AltLeft' || pressKeysBoard.has('AltLeft') && pressKeyMous ==='ControlLeft' || pressKeysBoard.has('AltLeft') && pressKeysBoard.has('ControlLeft')){
-    //   if(language ==='en') language = 'ru';
-    //   else language ='en';
-    // }
     upDateBoard();
     if(keys[code] && keys[code][language].length === 1){
       input.value  = input.value.slice(0 , cursPos) + keys[code][language] + input.value.slice(cursPos);
@@ -156,12 +153,14 @@ function clickHandler(code){
       input.selectionEnd = cursPos;
       return;
     }
+
     input.selectionStart = cursPos;
     input.selectionEnd = cursPos;
 }
 function upDateBoard(){
   let keyBoardContainer = document.querySelector('.board-container');
   let newBoard;
+//---------------------------------------------------------------------------
   if(pressKeysBoard.has('ControlLeft') && pressKeyMous ==='AltLeft' || pressKeysBoard.has('AltLeft') && pressKeyMous ==='ControlLeft' || pressKeysBoard.has('AltLeft') && pressKeysBoard.has('ControlLeft')){
     if(language ==='en') language = 'ru';
     else language ='en';
@@ -169,44 +168,87 @@ function upDateBoard(){
     keyBoardContainer.innerHTML = newBoard.innerHTML;
   }
 //----------------------------------------------------------------------------
-  if(pressKeyMous === 'ShiftLeft' || pressKeysBoard.has('ShiftLeft')){
-    if(!isPressShift){
 
-      isPressShift = true;
-      if(language === 'en'){
-        newBoard = createKeyBoard('shiftEn');
-        keyBoardContainer.innerHTML = newBoard.innerHTML;
-        language = 'shiftEn';
-      }
-      else{
-        newBoard = createKeyBoard('shiftRu');
-        keyBoardContainer.innerHTML = newBoard.innerHTML;
-        language = 'shiftRu';
-      }
-    } 
-  }
-  else {
-    if(isPressShift)
-    if(language === 'shiftEn'){
-      language = 'en';
-    }
-    else{
-      language = 'ru';
-    }
-      isPressShift = false;
-      newBoard = createKeyBoard(language);
-      keyBoardContainer.innerHTML = newBoard.innerHTML;
-  }
-//-----------------------------------------------------------------------------
-   if(pressKeyMous) {
-    pressElMous =  document.querySelector(`#${pressKeyMous}`);
-    pressElMous.classList.add('key--press');
-    }
-
-   for (const item of pressKeysBoard) {
-    document.querySelector(`#${item}`).classList.add('key--press');
-   } 
 }
+function shiftOn(){
+  let keyBoardContainer = document.querySelector('.board-container');
+  let newBoard;
+  if(!isPressShift){
+    if(language === 'en') { 
+      language = 'shiftEn';
+      newBoard = createKeyBoard('shiftEn'); 
+      keyBoardContainer.innerHTML = newBoard.innerHTML;} 
+
+    else { 
+      language = 'shiftRu';
+      newBoard = createKeyBoard('shiftRu'); keyBoardContainer.innerHTML = newBoard.innerHTML;
+    }
+
+    isPressShift = true;
+    document.querySelector(`#ShiftLeft`).classList.add('key--press');
+  }
+}
+
+function shiftOff(){
+  let keyBoardContainer = document.querySelector('.board-container');
+  let newBoard;
+  if(isPressShift){
+    isPressShift = false;
+    document.querySelector(`#ShiftLeft`).classList.remove('key--press');
+
+    if(language === 'shiftEn') {
+      language = 'en' 
+      newBoard = createKeyBoard('en'); keyBoardContainer.innerHTML = newBoard.innerHTML; 
+    } 
+
+    else {
+      language = 'ru' 
+      newBoard = createKeyBoard('ru'); keyBoardContainer.innerHTML = newBoard.innerHTML;
+    }
+
+  }
+}
+
+function capsTarget(){
+
+  let keyBoardContainer = document.querySelector('.board-container');
+  let newBoard;
+  if(!isPressCaps){
+    if(language === 'en') { 
+      language = 'CapsLockEn';
+      newBoard = createKeyBoard('CapsLockEn'); 
+      keyBoardContainer.innerHTML = newBoard.innerHTML;
+    } 
+
+    else { 
+      language = 'CapsLockRu';
+      newBoard = createKeyBoard('CapsLockRu'); keyBoardContainer.innerHTML = newBoard.innerHTML;
+    }
+
+    isPressCaps = true;
+    document.querySelector(`#CapsLock`).classList.add('key--press');
+  }
+
+  else{
+    if(language === 'CapsLockEn') { 
+      language = 'en';
+      newBoard = createKeyBoard('en'); 
+      keyBoardContainer.innerHTML = newBoard.innerHTML;
+    } 
+
+    else { 
+      language = 'ru';
+      newBoard = createKeyBoard('ru'); keyBoardContainer.innerHTML = newBoard.innerHTML;
+    }
+
+    isPressCaps = false;
+    document.querySelector(`#CapsLock`).classList.remove('key--press');
+  }
+
+}
+
+
+
 
 body.append(createPageContent(language));
 
@@ -214,23 +256,37 @@ body.append(createPageContent(language));
 document.onmousedown = evt=>{
     pressElMous = evt.target;
     pressKeyMous = pressElMous.id;
+
+    if(pressKeyMous === 'ShiftLeft') { shiftOn(); return}
+    if(pressKeyMous === 'CapsLock') { capsTarget(); return}
+
     if(pressElMous.id){
       clickHandler(pressKeyMous);
       pressElMous.classList.add('key--press');
     }
-    let input = document.querySelector('textarea');
-    input.focus();
 } 
+
 document.onmouseup = evt=>{
+
+    if(pressKeyMous === 'ShiftLeft' ) { shiftOff(); }
     pressElMous.classList.remove('key--press');
     pressKeyMous = '';
-    let input = document.querySelector('textarea');
-    input.focus();
-    upDateBoard();
 }
+
+
+
+
+
+
+
+
 
 window.onkeydown = evt => {
   let code = evt.code;
+
+  if(code === 'ShiftLeft') { shiftOn(); return; }
+  if(code === 'CapsLock') { capsTarget(); return; }
+
   evt.preventDefault();
   let el = document.querySelector(`#${code}`);
   if(el) {
@@ -242,13 +298,19 @@ window.onkeydown = evt => {
 
 window.onkeyup = evt => {
   let code = evt.code;
+  if(code === 'ShiftLeft') { shiftOff(); return; }
+  
+  
+  
   evt.preventDefault();
   let el = document.querySelector(`#${code}`);
+
+
 
   if(el && pressKeysBoard.has(el.id)){
     el.classList.remove('key--press');
     pressKeysBoard.delete(el.id);
   }
-  upDateBoard();
+
 }
  
