@@ -125,6 +125,7 @@ function createPageContent(language){
 }
 function clickHandler(code){
     let input = document.querySelector('textarea');
+    input.focus();
     let cursPos = input.selectionStart;
     if(pressKeysBoard.has('ControlLeft') && pressKeyMous ==='AltLeft' || pressKeysBoard.has('AltLeft') && pressKeyMous ==='ControlLeft' || pressKeysBoard.has('AltLeft') && pressKeysBoard.has('ControlLeft')){
       if(language ==='en') language = 'ru';
@@ -135,7 +136,7 @@ function clickHandler(code){
       cursPos++;
     }
     if(keys[code] && keys[code][language] === 'Tab'){
-      input.value += '    ';
+      input.value  = input.value.slice(0 , cursPos) + '    ' + input.value.slice(cursPos);
       cursPos += 4;
     }
     if(keys[code] && keys[code][language] === 'Backspace'){
@@ -178,5 +179,27 @@ document.onmouseup = evt=>{
     pressKeyMous = '';
     let input = document.querySelector('textarea');
     input.focus();
+}
+
+window.onkeydown = evt => {
+  let code = evt.code;
+  evt.preventDefault();
+  let el = document.querySelector(`#${code}`);
+  if(el) {
+    el.classList.add('key--press');
+    pressKeysBoard.add(el.id);
+    clickHandler(el.id);
+  }
+}
+
+window.onkeyup = evt => {
+  let code = evt.code;
+  evt.preventDefault();
+  let el = document.querySelector(`#${code}`);
+
+  if(el && pressKeysBoard.has(el.id)){
+    el.classList.remove('key--press');
+    pressKeysBoard.delete(el.id);
+  }
 }
  
