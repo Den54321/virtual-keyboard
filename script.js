@@ -1,18 +1,17 @@
 const keys  = {
     Backquote: { en:'`', ru: 'ё', shiftEn: '~', shiftRu: 'Ё', CapsLockEn: null, CapsLockRu: 'Ё'},
-    Digit1: { en:'1', ru: '1', shiftEn: '!', shiftRu: '!', CapsLockEn: null, CapsLockRu: null},
-    Digit2: { en:'2', ru: '2', shiftEn: '@', shiftRu: '"', CapsLockEn: null, CapsLockRu: null},
-    Digit3: { en:'3', ru: '3', shiftEn: '#', shiftRu: '№', CapsLockEn: null, CapsLockRu: null},
-    Digit4: { en:'4', ru: '4', shiftEn: '$', shiftRu: ';', CapsLockEn: null, CapsLockRu: null},
-    Digit5: { en:'5', ru: '5', shiftEn: '%', shiftRu: '%', CapsLockEn: null, CapsLockRu: null},
-    Digit6: { en:'6', ru: '6', shiftEn: '^', shiftRu: ':', CapsLockEn: null, CapsLockRu: null},
-    Digit7: { en:'7', ru: '7', shiftEn: '&', shiftRu: '?', CapsLockEn: null, CapsLockRu: null},
-    Digit8: { en:'8', ru: '8', shiftEn: '*', shiftRu: '*', CapsLockEn: null, CapsLockRu: null},
-    Digit9: { en:'9', ru: '9', shiftEn: '(', shiftRu: '(', CapsLockEn: null, CapsLockRu: null},
-    Digit0: { en:'0', ru: '0', shiftEn: ')', shiftRu: ')', CapsLockEn: null, CapsLockRu: null},
-    Minus: { en:'-', ru: '-', shiftEn: '_', shiftRu: '_', CapsLockEn: null, CapsLockRu: null},
-    Equal: { en:'=', ru: '=', shiftEn: '+', shiftRu: '+', CapsLockEn: null, CapsLockRu: null},
-    Equal: { en:'=', ru: '=', shiftEn: '+', shiftRu: '+', CapsLockEn: null, CapsLockRu: null},
+    Digit1: { en:'1', ru: '1', shiftEn: '!', shiftRu: '!', CapsLockEn: '1', CapsLockRu: '1'},
+    Digit2: { en:'2', ru: '2', shiftEn: '@', shiftRu: '"', CapsLockEn: '2', CapsLockRu: '2'},
+    Digit3: { en:'3', ru: '3', shiftEn: '#', shiftRu: '№', CapsLockEn: '3', CapsLockRu: '3'},
+    Digit4: { en:'4', ru: '4', shiftEn: '$', shiftRu: ';', CapsLockEn: '4', CapsLockRu: '4'},
+    Digit5: { en:'5', ru: '5', shiftEn: '%', shiftRu: '%', CapsLockEn: '5', CapsLockRu: '5'},
+    Digit6: { en:'6', ru: '6', shiftEn: '^', shiftRu: ':', CapsLockEn: '6', CapsLockRu: '6'},
+    Digit7: { en:'7', ru: '7', shiftEn: '&', shiftRu: '?', CapsLockEn: '7', CapsLockRu: '7'},
+    Digit8: { en:'8', ru: '8', shiftEn: '*', shiftRu: '*', CapsLockEn: '8', CapsLockRu: '8'},
+    Digit9: { en:'9', ru: '9', shiftEn: '(', shiftRu: '(', CapsLockEn:'9', CapsLockRu: '9'},
+    Digit0: { en:'0', ru: '0', shiftEn: ')', shiftRu: ')', CapsLockEn: '0', CapsLockRu: '0'},
+    Minus: { en:'-', ru: '-', shiftEn: '_', shiftRu: '_', CapsLockEn: '-', CapsLockRu: '-'},
+    Equal: { en:'=', ru: '=', shiftEn: '+', shiftRu: '+', CapsLockEn: '=', CapsLockRu: '='},
     Backslash: { en:'\\', ru: '\\', shiftEn: '/', shiftRu: '/', CapsLockEn: null, CapsLockRu: null},
     Backspace: { en: 'Backspace', ru: 'Backspace', shiftEn: 'Backspace', shiftRu: 'Backspace', CapsLockEn: 'Backspace', CapsLockRu: 'Backspace'},
     Tab: { en: 'Tab', ru: 'Tab', shiftEn: 'Tab', shiftRu: 'Tab', CapsLockEn: 'Tab', CapsLockRu: 'Tab'},
@@ -42,7 +41,7 @@ const keys  = {
     Semicolon: { en: ';', ru: 'ж', shiftEn: ':', shiftRu: 'Ж', CapsLockEn: ';', CapsLockRu: 'Ж'},
     Quote: { en: "'", ru: 'э', shiftEn: '"', shiftRu: 'Э', CapsLockEn: "'", CapsLockRu: 'Э'},
     Enter: { en: 'Enter', ru: 'Enter', shiftEn: 'Enter', shiftRu: 'Enter', CapsLockEn: "Enter", CapsLockRu: 'Enter'},
-    ShiftLeft: { en: 'Shift', ru: 'Shift', shiftEn: null, shiftRu: null, CapsLockEn: null, CapsLockRu: null},
+    ShiftLeft: { en: 'Shift', ru: 'Shift', shiftEn: 'Shift', shiftRu: 'Shift', CapsLockEn: 'Shift', CapsLockRu: 'Shift'},
     KeyZ: { en: 'z', ru: 'я', shiftEn: 'Z', shiftRu: 'Я', CapsLockEn: 'Z', CapsLockRu: 'Я'},
     KeyX: { en: 'x', ru: 'ч', shiftEn: 'X', shiftRu: 'Ч', CapsLockEn: 'X', CapsLockRu: 'Ч'},
     KeyC: { en: 'c', ru: 'с', shiftEn: 'C', shiftRu: 'С', CapsLockEn: 'C', CapsLockRu: 'С'},
@@ -69,6 +68,7 @@ const keys  = {
 //  const containerKey = document.querySelector('.container');
 const body = document.querySelector('body');
 var language = 'en';
+var isPressShift = false;
 var pressElMous;
 var pressKeyMous;
 var pressKeysBoard = new Set();
@@ -83,7 +83,6 @@ function createKey(keyName, language, idName){
   key.id = idName;
   return key;
 }
-
 function createKeyBoard(language){
   let containerKey = document.createElement('div');
   let row = document.createElement('div');
@@ -99,7 +98,6 @@ function createKeyBoard(language){
   }
   return containerKey;
 }
-
 function createPageContent(language){
   let title  = document.createElement('h1');
   title.textContent = 'RSS Виртуальная клавиатура';
@@ -127,10 +125,11 @@ function clickHandler(code){
     let input = document.querySelector('textarea');
     input.focus();
     let cursPos = input.selectionStart;
-    if(pressKeysBoard.has('ControlLeft') && pressKeyMous ==='AltLeft' || pressKeysBoard.has('AltLeft') && pressKeyMous ==='ControlLeft' || pressKeysBoard.has('AltLeft') && pressKeysBoard.has('ControlLeft')){
-      if(language ==='en') language = 'ru';
-      else language ='en';
-    }
+    // if(pressKeysBoard.has('ControlLeft') && pressKeyMous ==='AltLeft' || pressKeysBoard.has('AltLeft') && pressKeyMous ==='ControlLeft' || pressKeysBoard.has('AltLeft') && pressKeysBoard.has('ControlLeft')){
+    //   if(language ==='en') language = 'ru';
+    //   else language ='en';
+    // }
+    upDateBoard();
     if(keys[code] && keys[code][language].length === 1){
       input.value  = input.value.slice(0 , cursPos) + keys[code][language] + input.value.slice(cursPos);
       cursPos++;
@@ -160,6 +159,54 @@ function clickHandler(code){
     input.selectionStart = cursPos;
     input.selectionEnd = cursPos;
 }
+function upDateBoard(){
+  let keyBoardContainer = document.querySelector('.board-container');
+  let newBoard;
+  if(pressKeysBoard.has('ControlLeft') && pressKeyMous ==='AltLeft' || pressKeysBoard.has('AltLeft') && pressKeyMous ==='ControlLeft' || pressKeysBoard.has('AltLeft') && pressKeysBoard.has('ControlLeft')){
+    if(language ==='en') language = 'ru';
+    else language ='en';
+    newBoard = createKeyBoard(language);
+    keyBoardContainer.innerHTML = newBoard.innerHTML;
+  }
+//----------------------------------------------------------------------------
+  if(pressKeyMous === 'ShiftLeft' || pressKeysBoard.has('ShiftLeft')){
+    if(!isPressShift){
+
+      isPressShift = true;
+      if(language === 'en'){
+        newBoard = createKeyBoard('shiftEn');
+        keyBoardContainer.innerHTML = newBoard.innerHTML;
+        language = 'shiftEn';
+      }
+      else{
+        newBoard = createKeyBoard('shiftRu');
+        keyBoardContainer.innerHTML = newBoard.innerHTML;
+        language = 'shiftRu';
+      }
+    } 
+  }
+  else {
+    if(isPressShift)
+    if(language === 'shiftEn'){
+      language = 'en';
+    }
+    else{
+      language = 'ru';
+    }
+      isPressShift = false;
+      newBoard = createKeyBoard(language);
+      keyBoardContainer.innerHTML = newBoard.innerHTML;
+  }
+//-----------------------------------------------------------------------------
+   if(pressKeyMous) {
+    pressElMous =  document.querySelector(`#${pressKeyMous}`);
+    pressElMous.classList.add('key--press');
+    }
+
+   for (const item of pressKeysBoard) {
+    document.querySelector(`#${item}`).classList.add('key--press');
+   } 
+}
 
 body.append(createPageContent(language));
 
@@ -179,6 +226,7 @@ document.onmouseup = evt=>{
     pressKeyMous = '';
     let input = document.querySelector('textarea');
     input.focus();
+    upDateBoard();
 }
 
 window.onkeydown = evt => {
@@ -201,5 +249,6 @@ window.onkeyup = evt => {
     el.classList.remove('key--press');
     pressKeysBoard.delete(el.id);
   }
+  upDateBoard();
 }
  
